@@ -1,0 +1,225 @@
+.alert-error {
+    background: #ffe5e5;
+    color: #b00020;
+    border: 1px solid #ffb3b3;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    font-size: 14px;
+}
+.input-group .error {
+    display: block;
+    color: #b00020;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Основной контейнер */
+
+.auth-container {
+    width: 100%;
+    max-width: 570px;
+    margin: 50px auto;
+   font-family: 'ir';
+}
+
+/* Карточка авторизации */
+
+.auth-box {
+    width: 100%;
+    padding: 75px 65px;
+    background: #000000;
+    border: 3px solid #D4FF00;
+    border-radius: 45px;
+    box-shadow:
+        0 0 12px rgba(202, 255, 0, 0.15),
+        inset 0 0 15px rgba(202, 255, 0, 0.03);
+}
+
+/* Заголовок */
+
+h1 {
+    font-size: 32px;
+    text-align: center;
+    line-height: 48px;
+    font-weight: 700;
+    margin-bottom: 22px;
+    color: white;
+}
+
+.subtitle {
+    text-align: center;
+    color: #757575;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 55px;
+}
+
+/* Переключение вкладок */
+
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.tab {
+    flex: 1;
+    padding: 20px 10px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 27px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.tab:hover {
+    color: #D4FF00;
+}
+
+.tab.active {
+    background: #D4FF00;
+    color: #000000;
+}
+
+/* Разделительная линия */
+
+.line {
+    width: 100%;
+    height: 3px;
+    background: #D4FF00;
+    margin-bottom: 25px;
+}
+
+/* Поля ввода */
+
+.input-group {
+    margin-bottom: 27px;
+}
+
+.input-group label {
+    display: block;
+    color: white;
+    font-size: 19px;
+    font-weight: 600;
+    margin: 0 0 14px 5px;
+}
+
+.input-group input {
+    width: 100%;
+    height: 85px;
+    background: #000000;
+    border: 2px solid #D4FF00;
+    border-radius: 12px;
+    padding: 0 28px;
+    color: #ffffff;
+    font-size: 19px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input::placeholder {
+    color: #ffffff;
+}
+
+.input-group input:focus {
+    border-color: #D4FF00;
+    box-shadow: 0 0 12px rgba(202, 255, 0, 0.25);
+}
+
+/* Кнопка регистрации */
+
+.register-btn {
+    width: 100%;
+    height: 78px;
+    margin-top: 5px;
+    background: #D4FF00;
+    border: none;
+    border-radius: 20px; 
+    color: #000000;
+    font-size: 21px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register-btn:hover {
+    background: #e4ff45;
+    box-shadow: 0 0 20px rgba(202, 255, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.register-btn:active {
+    transform: scale(0.98);
+}
+
+/* Согласие с политикой */
+
+.agreement {
+    margin-top: 25px;
+    text-align: center;
+    color: #bdbdbd;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 600;
+}
+
+.agreement a {
+    color: #D4FF00;
+    text-decoration: none;
+}
+
+.agreement a:hover {
+    text-decoration: underline;
+}
+
+/* Адаптация под телефоны */
+
+@media (max-width: 600px) {
+
+    .auth-box {
+        padding: 40px 22px;
+        border-radius: 30px;
+    }
+
+    h1 {
+        font-size: 29px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+        margin-bottom: 35px;
+    }
+
+    .tab {
+        font-size: 17px;
+        padding: 16px 5px;
+    }
+
+    .input-group label {
+        font-size: 16px;
+    }
+
+    .input-group input {
+        height: 65px;
+        font-size: 16px;
+        border-radius: 15px;
+    }
+
+    .register-btn {
+        height: 65px;
+        font-size: 17px;
+    }
+
+    .agreement {
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,599 @@
+main {
+  font-family: 'ir';
+}
+
+.profile-h1 {
+  font-size: 60px;
+  font-family: 'ub';
+  text-align: left;
+  margin-top: 30px;
+}
+
+.profile-h1 span {
+  color: #d4ff00;
+}
+
+/* left-box */
+
+.left-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.left-box .top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 13px;
+}
+
+.user-info__section {
+  margin-top: 58px;
+  display: flex;
+  align-items: self-start;
+  justify-content: space-around;
+  gap: 70px;
+  flex-wrap: wrap;
+}
+
+.user-info__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: white;
+}
+
+.user-info__top .name {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.user-info__top .icon {
+  height: 24px;
+}
+
+.user-info__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #5b6e8c;
+  gap: 10px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.left-box .bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.left-box .bottom .but-1,
+.but-2 {
+  padding: 10px 30px;
+  width: 100%;
+  border: none;
+}
+.left-box .bottom .but-1:hover {
+  background-color: #d4ff00;
+  color: black;
+  transition: 0.5s;
+}
+
+/* Активный таб */
+.left-box .bottom .but-1.is-active {
+  background-color: #d4ff00;
+  color: black;
+}
+
+.left-box .bottom .but-2.is-active {
+  background-color: #d4ff00;
+  color: black;
+}
+
+/* right-box */
+.user-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.form__block input {
+  padding: 5px 20px;
+  height: 57px;
+  max-width: 387px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Подписи к полям */
+.user-form label {
+  font-family: 'ir';
+  font-size: 13px;
+  color: #8a8a8a;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Обёртка поля (label + input + error) */
+.user-form .input-group {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Сообщение об ошибке под полем */
+.input-group .error {
+  display: block;
+  color: #ff5c5c;
+  font-size: 12px;
+  font-family: 'ir';
+  margin-top: 4px;
+}
+
+.user-form button {
+  padding: 10px 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 30px;
+  max-width: 278px;
+  width: 100%;
+  height: 39px;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* Алерты (успех / ошибка) */
+.alert-success,
+.alert-error {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  font-family: 'ir';
+  font-size: 14px;
+  border-left: 3px solid;
+}
+
+.alert-success {
+  background: rgba(213, 255, 0, 0.08);
+  color: #d4ff00;
+  border-left-color: #d4ff00;
+}
+
+.alert-error {
+  background: rgba(255, 92, 92, 0.08);
+  color: #ff5c5c;
+  border-left-color: #ff5c5c;
+}
+
+/* Пустые состояния */
+.profile-empty {
+  font-family: 'ir';
+  font-size: 15px;
+  color: #8a8a8a;
+  padding: 30px 0;
+  line-height: 1.6;
+}
+
+.link-accent {
+  color: #d4ff00;
+  text-decoration: none;
+}
+
+.link-accent:hover {
+  opacity: 0.8;
+}
+
+/* ==============================
+   КАРТОЧКА АБОНЕМЕНТА
+============================== */
+
+.subscription-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 35px 20px 20px;
+}
+
+.subscription-card {
+  width: 370px;
+  min-height: 395px;
+
+  background: #d5ff00;
+  color: #080808;
+
+  border-radius: 5px;
+  padding: 22px 25px 25px;
+
+  box-shadow: 0 0 15px rgba(213, 255, 0, 0.08);
+}
+
+/* Верх карточки */
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'ub';
+}
+
+.plan-name {
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.hit-badge {
+  background: #080808;
+  color: #d5ff00;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+/* Цена */
+
+.price {
+  margin-top: 17px;
+  font-family: 'ub';
+  font-size: 49px;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+.price span {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #747d29;
+}
+
+/* Описание тарифа */
+
+.plan-description {
+  font-size: 12px;
+  color: #747d29;
+  margin-top: -2px;
+}
+
+/* Список преимуществ */
+
+.plan-features {
+  list-style: none;
+  margin-top: 25px;
+}
+
+.plan-features li {
+  font-size: 13px;
+  color: #555c25;
+
+  margin-bottom: 12px;
+  padding-left: 20px;
+
+  position: relative;
+}
+
+.plan-features li::before {
+  content: '✔';
+
+  position: absolute;
+  left: 0;
+
+  color: #080808;
+  font-weight: 900;
+}
+
+/* Срок действия */
+
+.expiration {
+  display: flex;
+  flex-direction: column;
+  font-family: 'ub';
+  margin-top: 26px;
+  gap: 3px;
+}
+
+.expiration span,
+.expiration strong {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+/* записи */
+
+.records-section {
+  width: 100%;
+  padding: 0 6.3% 40px;
+}
+
+.records-table-wrapper {
+  width: 100%;
+  border: 1px solid #a6c832;
+  border-radius: 27px;
+
+  padding: 12px 25px 25px;
+  overflow-x: auto;
+}
+
+.records-table {
+  width: 100%;
+  min-width: 850px;
+
+  border-collapse: collapse;
+  text-align: left;
+  color: #ffffff;
+}
+
+/* Заголовки таблицы */
+
+.records-table th {
+  font-size: 14px;
+  font-weight: 700;
+
+  padding: 16px 18px 20px;
+  white-space: nowrap;
+}
+
+/* Ячейки */
+
+.records-table td {
+  font-size: 13px;
+  font-weight: 500;
+
+  padding: 14px 18px;
+  height: 58px;
+
+  white-space: nowrap;
+}
+
+/* Статусы */
+
+.status {
+  display: inline-block;
+
+  padding: 7px 17px;
+  border-radius: 30px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-align: center;
+}
+
+.confirmed {
+  background: #d5ff00;
+  color: #111111;
+}
+
+.waiting {
+  background: #f0efff;
+  color: #222222;
+}
+
+/* Изменение статуса */
+
+.status-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #eeeeee;
+  color: #222222;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 30px 8px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2 3l3 3 3-3' fill='none' stroke='%23222' stroke-width='1.5'/%3E%3C/svg%3E");
+
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+
+  transition: 0.2s;
+}
+
+.status-select:hover {
+  background-color: #d5ff00;
+}
+
+@media (max-width: 1024px) {
+  main {
+    padding: 20px;
+  }
+
+  .user-info__section {
+    gap: 40px;
+    justify-content: space-between;
+  }
+
+  .form__block {
+    gap: 24px;
+  }
+
+  .form__block input {
+    max-width: 100%;
+  }
+
+  .user-form button {
+    max-width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .profile-h1 {
+    font-size: 42px;
+    margin-top: 20px;
+  }
+
+  .user-info__section {
+    margin-top: 35px;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .left-box,
+  .right-box {
+    width: 100%;
+  }
+
+  /* Кнопки  */
+  .left-box .bottom {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .left-box .bottom .but-1,
+  .left-box .bottom .but-2 {
+    width: auto;
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-h1 {
+    font-size: 32px;
+    line-height: 1.15;
+  }
+
+  .user-info__top .name {
+    font-size: 20px;
+  }
+
+  .user-info__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .left-box .bottom {
+    flex-direction: column;
+  }
+
+  .left-box .bottom .but-1,
+  .left-box .bottom .but-2 {
+    width: 100%;
+  }
+
+  /* Форма  */
+  .form__block {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .form__block input {
+    height: 50px;
+    max-width: 100%;
+  }
+
+  .user-form button {
+    height: auto;
+    min-height: 44px;
+    padding: 12px 20px;
+    font-size: 14px;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  /* Карточка абонемента */
+  .subscription-section {
+    padding: 25px 15px;
+  }
+
+  .subscription-card {
+    width: 100%;
+    max-width: 370px;
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .price {
+    font-size: 40px;
+  }
+
+  .plan-features li {
+    font-size: 12.5px;
+  }
+
+  .expiration span,
+  .expiration strong {
+    font-size: 18px;
+  }
+
+  /* Таблица записей */
+  .records-section {
+    padding: 0 15px 30px;
+  }
+
+  .records-table-wrapper {
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .records-table th,
+  .records-table td {
+    padding: 13px 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .profile-h1 {
+    font-size: 28px;
+  }
+}
+
+/* Кнопка отмены записи */
+.btn-cancel {
+  background: transparent;
+  border: 1px solid #ff5c5c;
+  color: #ff5c5c;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: 'ir';
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #ff5c5c;
+  color: #000;
+}
+
+/* Кнопка перехода на премиум */
+.btn-upgrade {
+  background: #080808;
+  color: #d4ff00;
+  padding: 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: 'isb';
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+
+.btn-upgrade:hover {
+  background: #222;
+}

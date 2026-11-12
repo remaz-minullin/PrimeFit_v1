@@ -1,0 +1,11 @@
+/* главный диспечер стилей */
+
+@import url("global.css");
+@import url("header-footer.css");
+@import url("start.css");
+@import url("auth.css");
+@import url("profile.css");
+@import url("abonements.css");
+@import url("trainers.css");
+@import url("admin.css");
+@import url("admin_add.css");

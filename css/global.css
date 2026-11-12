@@ -1,0 +1,41 @@
+@font-face {
+    font-family: im;
+    src: url(..//fonts/inter-medium.otf);
+}
+@font-face {
+    font-family: isb;
+    src: url(..//fonts/inter-semi-bold.otf);
+}
+@font-face {
+    font-family: ir;
+    src: url(..//fonts/inter-regular.otf);
+}
+@font-face {
+    font-family: ib;
+    src: url(..//fonts/inter-bold.otf);
+}
+@font-face {
+    font-family: abr;
+    src: url(..//fonts/archivo-black-regular.ttf);
+}
+@font-face {
+    font-family: ub;
+    src: url(..//fonts/unbounded-black.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    /* font-family: 'Courier New', Courier, monospace; */
+    box-sizing: border-box;
+    transition: 0.5s;
+    scroll-behavior: smooth;
+}
+body {
+    background-color: #0A0A0A;
+}
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
