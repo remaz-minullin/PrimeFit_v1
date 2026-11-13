@@ -32,7 +32,7 @@ $home_plans = $stmt->fetchAll();
         <p class="t-1">Премиальное оборудование, тренеры-эксперты и атмосфера,которая вытаскивает из зоны комфорта.
             Выбери
             свой абонемент в «Прайм Фитнес».</p>
-        <div>
+        <div class="banner_buttons">
             <a href="index.php?page=abonements" class="but-2">ВЫБРАТЬ АБОНЕМЕНТ <img src="images/strel.svg" alt=""></a>
             <a href="index.php?page=trainers" class="but-1">НАШИ ТРЕНЕРЫ</a>
         </div>
@@ -160,9 +160,9 @@ $home_plans = $stmt->fetchAll();
             </div>
         </div>
     </div>
-    <div class="preim-1">
+    <div class="preim-1 preim-1__02">
         <h1 class="t-14">02</h1>
-        <p class="t-15" style="margin-top: 280px;">Тренеры-эксперты</p>
+        <p class="t-15">Тренеры-эксперты</p>
         <p class="t-13">40+ сертифицированных специалистов.
             Индивидуальная программа, контроль техники и
             поддержка на каждом этапе.</p>
@@ -171,17 +171,22 @@ $home_plans = $stmt->fetchAll();
 
 <div class="container zal">
     <img src="images/zal.svg" alt="">
-    <div class="preim-1">
+    <div class="preim-1 preim-1__05">
         <h1 class="t-14">05</h1>
-        <p class="t-15">Поддержка 24/7</p>
-        <p class="t-13">Вопросы по абонементу — решаем по звонку за минуты.</p>
+        <div>
+            <p class="t-15">Поддержка 24/7</p>
+            <p class="t-13">Вопросы по абонементу — решаем по звонку за минуты.</p>
+        </div>
     </div>
 </div>
 
 <div class="cta">
     <h1 class="t-16">ГОТОВ НАЧАТЬ?</h1>
     <div class="tren">
-        <button class="but-4">ЗАПИСАТЬСЯ НА ТРЕНИРОВКУ <img src="images/zelt.svg" alt=""></button>
+        <a href="index.php?page=trainers" class="but-4"
+            style="display: inline-block; text-align: center; text-decoration: none; line-height: 50px;">
+            ЗАПИСАТЬСЯ НА ТРЕНИРОВКУ <img src="images/zelt.svg" alt="" style="vertical-align: middle;">
+        </a>
     </div>
 </div>
 </div>

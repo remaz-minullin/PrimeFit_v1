@@ -7,7 +7,7 @@ if (empty($USER) || ($USER['role'] ?? '') !== 'admin') {
     exit;
 }
 
-$id = (int)($_GET['id'] ?? 0);
+$id = (int) ($_GET['id'] ?? 0);
 if ($id === 0) {
     header('Location: index.php?page=admin');
     exit;
@@ -30,15 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $direction = trim($_POST['direction'] ?? '');
     $description = trim($_POST['description'] ?? '');
 
-   
+
     $photoPath = $trainer['photo'];
+    $userId = (int) ($_POST['user_id'] ?? 0) ?: null;
 
     // Валидация 
     if ($name === '' || $direction === '') {
         $error = 'Заполните имя и направление тренера.';
-    }
-
-    elseif (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+    } elseif (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
         $file = $_FILES['photo'];
 
         $allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
@@ -69,8 +68,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$error) {
-        $stmt = $database->prepare('UPDATE trainers SET name = ?, direction = ?, description = ?, photo = ? WHERE id = ?');
-        $stmt->execute([$name, $direction, $description, $photoPath, $id]);
+        $stmt = $database->prepare('
+            UPDATE trainers 
+            SET name = ?, direction = ?, description = ?, photo = ?, user_id = ? 
+            WHERE id = ?
+        ');
+
+
+        $stmt->execute([
+            $name,
+            $direction,
+            $description,
+            $photoPath,
+            $userId,
+            $id
+        ]);
 
         header('Location: index.php?page=admin&success=обновлен');
         exit;
@@ -89,21 +101,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="trainer-photo-section">
                 <label for="trainerPhoto" class="trainer-photo-upload">
-                  
-                    <img src="<?= !empty($trainer['photo']) ? htmlspecialchars($trainer['photo']) : '' ?>" 
-                         alt="Фото тренера" id="trainerPhotoPreview" 
-                         style="<?= !empty($trainer['photo']) ? 'display: block;' : 'display: none;' ?>">
-                    
+
+                    <img src="<?= !empty($trainer['photo']) ? htmlspecialchars($trainer['photo']) : '' ?>"
+                        alt="Фото тренера" id="trainerPhotoPreview"
+                        style="<?= !empty($trainer['photo']) ? 'display: block;' : 'display: none;' ?>">
+
                     <!-- Плейсхолдер скрываем, если фото уже есть -->
-                    <div class="photo-placeholder" id="photoPlaceholder" 
-                         style="<?= !empty($trainer['photo']) ? 'display: none;' : '' ?>">
+                    <div class="photo-placeholder" id="photoPlaceholder"
+                        style="<?= !empty($trainer['photo']) ? 'display: none;' : '' ?>">
                         <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 7H7L9 4H15L17 7H20C21.1 7 22 7.9 22 9V19C22 20.1 21.1 21 20 21H4C2.9 21 2 20.1 2 19V9C2 7.9 2.9 7 4 7Z" fill="currentColor" />
+                            <path
+                                d="M4 7H7L9 4H15L17 7H20C21.1 7 22 7.9 22 9V19C22 20.1 21.1 21 20 21H4C2.9 21 2 20.1 2 19V9C2 7.9 2.9 7 4 7Z"
+                                fill="currentColor" />
                             <circle cx="12" cy="14" r="4" stroke="#EEEEEE" stroke-width="2" />
                         </svg>
                         <span>Добавьте изображение</span>
                     </div>
-                    
+
                     <input type="file" id="trainerPhoto" name="photo" accept="image/*" hidden>
                 </label>
             </div>
@@ -111,24 +125,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="trainer-form-section">
                 <div class="trainer-form-group">
                     <label for="trainerName">Введите имя и фамилию тренера</label>
-                    <input type="text" id="trainerName" name="name" placeholder="Иван Иванов" 
-                           value="<?= htmlspecialchars($trainer['name']) ?>" >
+                    <input type="text" id="trainerName" name="name" placeholder="Иван Иванов"
+                        value="<?= htmlspecialchars($trainer['name']) ?>">
                 </div>
 
                 <div class="trainer-form-group">
                     <label for="trainerAbout">Введите описание</label>
-                    <textarea id="trainerAbout" name="description" placeholder="Опыт работы, достижения..." required><?= htmlspecialchars($trainer['description']) ?></textarea>
+                    <textarea id="trainerAbout" name="description" placeholder="Опыт работы, достижения..."
+                        required><?= htmlspecialchars($trainer['description']) ?></textarea>
                 </div>
 
                 <div class="trainer-form-group">
                     <label for="trainerDirection">Введите направление тренера</label>
-                    <input type="text" id="trainerDirection" name="direction" placeholder="Кроссфит" 
-                           value="<?= htmlspecialchars($trainer['direction']) ?>" >
+                    <input type="text" id="trainerDirection" name="direction" placeholder="Кроссфит"
+                        value="<?= htmlspecialchars($trainer['direction']) ?>">
+                </div>
+
+                <div class="trainer-form-group">
+                    <label for="trainerUser">Привязать к аккаунту</label>
+                    <select id="trainerUser" name="user_id"
+                        style="width: 100%; height: 58px; padding: 0 19px; background: #090909; border: 1.5px solid #888; border-radius: 14px; color: #fff; font-family: inherit; font-size: 15px; outline: none; cursor: pointer;">
+                        <option value="">-- Не выбран --</option>
+                        <?php
+                        // Ищем юзеров с ролью trainer
+                        $usersStmt = $database->query("SELECT id, email, name FROM users WHERE role = 'trainer' ORDER BY id DESC");
+                        $allUsers = $usersStmt->fetchAll();
+                        foreach ($allUsers as $u) {
+                            $display = $u['name'] ? $u['name'] . ' (' . $u['email'] . ')' : $u['email'];
+                            echo '<option value="' . $u['id'] . '">' . htmlspecialchars($display) . '</option>';
+                        }
+                        ?>
+                    </select>
                 </div>
 
                 <button type="submit" class="add-trainer-submit">Сохранить изменения</button>
-                
-                <a href="index.php?page=admin" style="text-align: center; display: block; margin-top: 15px; color: #888; text-decoration: none;">Отмена</a>
+
+                <a href="index.php?page=admin"
+                    style="text-align: center; display: block; margin-top: 15px; color: #888; text-decoration: none;">Отмена</a>
             </div>
 
         </form>

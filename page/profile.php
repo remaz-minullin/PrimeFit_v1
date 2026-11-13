@@ -5,6 +5,12 @@ if (empty($USER)) {
     exit;
 }
 
+// перенаправка тренера на его профиль 
+if (($USER['role'] ?? '') === 'trainer') {
+    header('Location: index.php?page=trainer_profile');
+    exit;
+}
+
 $userId = (int) $USER['id'];
 $errors = [];
 $success = false;
@@ -111,6 +117,19 @@ $stmt = $database->prepare('
 $stmt->execute([$userId]);
 $activeMembership = $stmt->fetch() ?: null;
 
+/* Уведомления */
+// Обработка кнопки "Ознакомлен"
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'read_notification') {
+    $notifId = (int) ($_POST['notification_id'] ?? 0);
+    $stmt = $database->prepare('UPDATE notifications SET is_read = 1 WHERE id = ? AND user_id = ?');
+    $stmt->execute([$notifId, $userId]);
+}
+
+//  непрочитанные
+$stmt = $database->prepare('SELECT * FROM notifications WHERE user_id = ? AND is_read = 0 ORDER BY created_at DESC');
+$stmt->execute([$userId]);
+$unreadNotifications = $stmt->fetchAll();
+
 /* записи */
 $stmt = $database->prepare('
     SELECT
@@ -169,6 +188,26 @@ $displayName = !empty($USER['name']) && $USER['name'] !== $USER['email']
         </div>
 
         <div class="right-box">
+
+            <!-- Блок уведомлений -->
+            <?php if (!empty($unreadNotifications)): ?>
+                <div class="notifications-block" style="margin-bottom: 20px;">
+                    <?php foreach ($unreadNotifications as $notif): ?>
+                        <div class="alert-error"
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span>
+                                <?= htmlspecialchars($notif['message']) ?>
+                            </span>
+                            <form method="POST" style="margin: 0;">
+                                <input type="hidden" name="action" value="read_notification">
+                                <input type="hidden" name="notification_id" value="<?= $notif['id'] ?>">
+                                <button type="submit"
+                                    style="background: #b00020; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px;">Ок</button>
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
 
             <?php if ($tab === 'data'): ?>
 
@@ -350,28 +389,28 @@ $displayName = !empty($USER['name']) && $USER['name'] !== $USER['email']
 <script>
     // Маска для телефона
     const phoneInput = document.getElementById('phone');
-    
+
     if (phoneInput) {
         phoneInput.addEventListener('input', () => {
-        
+
             let digits = phoneInput.value.replace(/\D/g, '');
-          
+
             if (digits.startsWith('8')) {
                 digits = '7' + digits.slice(1);
             }
-            
+
             if (digits.length > 0 && !digits.startsWith('7')) {
                 digits = '7' + digits;
             }
-        
+
             digits = digits.slice(1, 11);
-            
+
             let formatted = '+7';
             if (digits.length > 0) formatted += ' (' + digits.slice(0, 3);
             if (digits.length >= 4) formatted += ') ' + digits.slice(3, 6);
             if (digits.length >= 7) formatted += '-' + digits.slice(6, 8);
             if (digits.length >= 9) formatted += '-' + digits.slice(8, 10);
-            
+
             phoneInput.value = formatted;
         });
     }

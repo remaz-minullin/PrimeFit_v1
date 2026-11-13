@@ -29,6 +29,7 @@
     if ($page == 'admin_plan_edit') { include('page/admin_plan_edit.php'); }
     if ($page == 'admin_trainer_add') { include('page/admin_trainer_add.php'); }
     if ($page == 'admin_trainer_edit') { include('page/admin_trainer_edit.php'); }
+    if ($page == 'trainer_profile') { include('page/trainer_profile.php'); }
     
 } else {
     include('php/start.php');

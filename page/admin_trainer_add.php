@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = trim($_POST['description'] ?? '');
 
     $photoPath = null;
+    $userId = (int) ($_POST['user_id'] ?? 0) ?: null;
 
     // Валидация 
     if ($name === '' || $direction === '') {
@@ -53,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     if (!$error) {
-        $stmt = $database->prepare('INSERT INTO trainers (name, direction, description, photo) VALUES (?, ?, ?, ?)');
-        $stmt->execute([$name, $direction, $description, $photoPath]);
+        $stmt = $database->prepare('INSERT INTO trainers (name, direction, description, photo, user_id) VALUES (?, ?, ?, ?, ?)');
+        $stmt->execute([$name, $direction, $description, $photoPath, $userId]);
 
         header('Location: index.php?page=admin&success=добавлен');
         exit;
@@ -104,6 +105,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="trainer-form-group">
                     <label for="trainerDirection">Введите направление тренера</label>
                     <input type="text" id="trainerDirection" name="direction" placeholder="Кроссфит">
+                </div>
+
+                <!-- Выбор привязанного аккаунта -->
+                <div class="trainer-form-group">
+                    <label for="trainerUser">Привязать к аккаунту</label>
+                    <select id="trainerUser" name="user_id"
+                        style="width: 100%; height: 58px; padding: 0 19px; background: #090909; border: 1.5px solid #888; border-radius: 14px; color: #fff; font-family: inherit; font-size: 15px; outline: none; cursor: pointer;">
+                        <option value="">-- Не выбран --</option>
+                        <?php
+                        // Ищем ТОЛЬКО юзеров с ролью trainer
+                        $usersStmt = $database->query("SELECT id, email, name FROM users WHERE role = 'trainer' ORDER BY id DESC");
+                        $allUsers = $usersStmt->fetchAll();
+                        foreach ($allUsers as $u) {
+                            $display = $u['name'] ? $u['name'] . ' (' . $u['email'] . ')' : $u['email'];
+                            echo '<option value="' . $u['id'] . '">' . htmlspecialchars($display) . '</option>';
+                        }
+                        ?>
+                    </select>
                 </div>
 
                 <button type="submit" class="add-trainer-submit">Добавить</button>
